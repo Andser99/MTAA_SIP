@@ -1,6 +1,6 @@
 ﻿**Implementácia**
 
-SIP proxy stavia nad existujúcou knižnicou PySipFillProxy [^1] Riešenie je implemen- tované v jazyku Python 2.7, súbor main.py konfiguruje a spúšťa potrebné funkcie knižnice. Z nepovinných funkcionalít sú implementované všetky okrem logovania "den- níka hovorov".
+SIP proxy stavia nad existujúcou knižnicou PySipFillProxy [^1] Riešenie je implementované v jazyku Python 2.7, súbor main.py konfiguruje a spúšťa potrebné funkcie knižnice. Z nepovinných funkcionalít sú implementované všetky okrem logovania "denníka hovorov".
 
 **Vzorky pcap**
 
@@ -14,13 +14,13 @@ SIP proxy stavia nad existujúcou knižnicou PySipFillProxy [^1] Riešenie je im
 **Nepovinné**
 
 - frames\_conference.pcap
+    - konferenčný hovor medzi 3 zariadeniami
 - frames\_redirect.pcap
+    - presmerovanie hovoru na 3. zariadenie
 - frames\_video\_call.pcap
-  - konferenčný hovor medzi 3 zariadeniami
-- presmerovanie hovoru na 3. zariadenie
-  - videohovor, video zapnuté po zdvihnutí
-
-- frames\_200\_DOBRE- odpoveď 200 OK je premenovaná na 200 DOBRE pri reg- istrácií.
+    - videohovor, video zapnuté po zdvihnutí
+- frames\_200\_DOBRE 
+    -odpoveď 200 OK je premenovaná na 200 DOBRE pri registrácií.
 
 **1 Program**
 
@@ -28,6 +28,6 @@ SIP proxy stavia nad existujúcou knižnicou PySipFillProxy [^1] Riešenie je im
 
 - Python 2.7
 
-Program je možné spustiť cez konzolu pomocou python main.py , je možné aj zadať adresu na ktorej bude fungovať
+Program je možné spustiť cez konzolu pomocou python main.py, je možné aj zadať adresu na ktorej bude fungovať
 
 [^1]: Zdroj - https://github.com/tirfil/PySipFullProxy
