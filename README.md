@@ -1,14 +1,4 @@
-﻿**Slovak Technical University**
-
-**Faculty of Informatics and Information Technologies![](Aspose.Words.a3630bad-47a5-4a9c-b90b-0e2f45272311.001.png)**
-
-Andrej Byrtus
-
-**SIP Proxy![](Aspose.Words.a3630bad-47a5-4a9c-b90b-0e2f45272311.002.png)**
-
-**Predmet:** Mobilné technológie a aplikácie **Ročník:** 2021/2022
-
-**Implementácia**
+﻿**Implementácia**
 
 SIP proxy stavia nad existujúcou knižnicou PySipFillProxy [^1] Riešenie je implemen- tované v jazyku Python 2.7, súbor main.py konfiguruje a spúšťa potrebné funkcie knižnice. Z nepovinných funkcionalít sú implementované všetky okrem logovania "den- níka hovorov".
 
@@ -26,7 +16,7 @@ SIP proxy stavia nad existujúcou knižnicou PySipFillProxy [^1] Riešenie je im
 - frames\_conference.pcap
 - frames\_redirect.pcap
 - frames\_video\_call.pcap
-  - konferenčný hovor medzi 3 zariadeniami
+  - konferenčný hovor medzi 3 zariadeniami
 - presmerovanie hovoru na 3. zariadenie
   - videohovor, video zapnuté po zdvihnutí
 
@@ -41,5 +31,3 @@ SIP proxy stavia nad existujúcou knižnicou PySipFillProxy [^1] Riešenie je im
 Program je možné spustiť cez konzolu pomocou python main.py , je možné aj zadať adresu na ktorej bude fungovať
 
 [^1]: Zdroj - https://github.com/tirfil/PySipFullProxy
-
-    1
