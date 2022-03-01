@@ -70,6 +70,8 @@ recordroute = ""
 topvia = ""
 registrar = {}
 
+ip = ""
+
 def hexdump( chars, sep, width ):
     while chars:
         line = chars[:width]
@@ -252,7 +254,7 @@ class UDPHandler(SocketServer.BaseRequestHandler):
         if expires == 0:
             if registrar.has_key(fromm):
                 del registrar[fromm]
-                self.sendResponse("200 0K")
+                self.sendResponse("200 OK")
                 return
         else:
             now = int(time.time())
@@ -264,7 +266,7 @@ class UDPHandler(SocketServer.BaseRequestHandler):
         logging.debug("Expires= %d" % expires)
         registrar[fromm]=[contact,self.socket,self.client_address,validity]
         self.debugRegister()
-        self.sendResponse("200 0K")
+        self.sendResponse("200 OK")
         
     def processInvite(self):
         logging.debug("-----------------")
@@ -272,7 +274,7 @@ class UDPHandler(SocketServer.BaseRequestHandler):
         logging.debug("-----------------")
         origin = self.getOrigin()
         if len(origin) == 0 or not registrar.has_key(origin):
-            self.sendResponse("400 Bad Request")
+            self.sendResponse("400 Zla poziadavka")
             return
         destination = self.getDestination()
         if len(destination) > 0:
@@ -292,9 +294,9 @@ class UDPHandler(SocketServer.BaseRequestHandler):
                 logging.info("<<< %s" % data[0])
                 logging.debug("---\n<< server send [%d]:\n%s\n---" % (len(text),text))
             else:
-                self.sendResponse("480 Temporarily Unavailable")
+                self.sendResponse("480 Docasne nedostupne")
         else:
-            self.sendResponse("500 Server Internal Error")
+            self.sendResponse("500 Chyba servera")
                 
     def processAck(self):
         logging.debug("--------------")
@@ -322,7 +324,7 @@ class UDPHandler(SocketServer.BaseRequestHandler):
         logging.debug("----------------------")
         origin = self.getOrigin()
         if len(origin) == 0 or not registrar.has_key(origin):
-            self.sendResponse("400 Bad Request")
+            self.sendResponse("400 Zla poziadavka")
             return
         destination = self.getDestination()
         if len(destination) > 0:
@@ -342,7 +344,7 @@ class UDPHandler(SocketServer.BaseRequestHandler):
             else:
                 self.sendResponse("406 Not Acceptable")
         else:
-            self.sendResponse("500 Server Internal Error")
+            self.sendResponse("500 Chyba servera")
                 
     def processCode(self):
         origin = self.getOrigin()
@@ -386,11 +388,11 @@ class UDPHandler(SocketServer.BaseRequestHandler):
             elif rx_update.search(request_uri):
                 self.processNonInvite()
             elif rx_subscribe.search(request_uri):
-                self.sendResponse("200 0K")
+                self.sendResponse("200 OK")
             elif rx_publish.search(request_uri):
-                self.sendResponse("200 0K")
+                self.sendResponse("200 OK")
             elif rx_notify.search(request_uri):
-                self.sendResponse("200 0K")
+                self.sendResponse("200 OK")
             elif rx_code.search(request_uri):
                 self.processCode()
             else:
@@ -416,19 +418,4 @@ class UDPHandler(SocketServer.BaseRequestHandler):
                 hexdump(data,' ',16)
                 logging.warning("---")
 
-if __name__ == "__main__":    
-    logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s',filename='proxy.log',level=logging.INFO,datefmt='%H:%M:%S')
-    logging.info(time.strftime("%a, %d %b %Y %H:%M:%S ", time.localtime()))
-    hostname = socket.gethostname()
-    logging.info(hostname)
-    ipaddress = socket.gethostbyname(hostname)
-    # logging.info("prev IP")
-    # logging.info(ipaddress)
-    # ipaddress = "192.168.0.101" # LOCAL IP ADDRESS
-    # if ipaddress == "127.0.0.1":
-    #     ipaddress = sys.argv[1]
-    logging.info(ipaddress)
-    recordroute = "Record-Route: <sip:%s:%d;lr>" % (ipaddress,PORT)
-    topvia = "Via: SIP/2.0/UDP %s:%d" % (ipaddress,PORT)
-    server = SocketServer.UDPServer((HOST, PORT), UDPHandler)
-    server.serve_forever()
+
