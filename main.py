@@ -14,8 +14,8 @@ def main():
     hostname = socket.gethostname()
     logging.info(hostname)
     ipaddress = socket.gethostbyname(hostname)
-    if (ip != ""):
-        ipaddress = ip
+    if (sipfullproxy.ip != ""):
+        ipaddress = sipfullproxy.ip
     # logging.info("prev IP")
     # logging.info(ipaddress)
     # ipaddress = "192.168.0.101" # LOCAL IP ADDRESS
@@ -32,5 +32,5 @@ if __name__ == "__main__":
     args = sys.argv[1:]
     print(args)
     if (len(args) > 0):
-        ip = args[0]
+        sipfullproxy.ip = args[0]
     main()
